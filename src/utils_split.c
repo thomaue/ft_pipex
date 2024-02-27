@@ -6,11 +6,11 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:48:05 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/24 14:49:51 by tauer            ###   ########.fr       */
+/*   Updated: 2024/02/27 09:59:55 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./pipex.h"
+#include "../header/pipex.h"
 
 int	is_sep(char c, char *charset)
 {

@@ -6,18 +6,19 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 21:44:17 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/26 19:32:46 by tauer            ###   ########.fr       */
+/*   Updated: 2024/02/27 13:04:22 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX
-#define PIPEX
+# define PIPEX
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdbool.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <sys/wait.h>
 
 typedef enum t_type
 {
@@ -30,6 +31,12 @@ typedef enum t_type
 
 typedef struct s_pipex
 {
+    pid_t id_fat;
+    pid_t id_son;
+
+    size_t    nb_cmd;
+    size_t      i;
+
     char **envp;
     char **argv;
     int    argc;
@@ -41,7 +48,7 @@ typedef struct s_pipex
 bool	set_arg_tab(t_pipex *pip);
 bool	ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*clear_quote(char *arg);
-bool	acces_bol(t_pipex *pip, const char *path);
+bool	acces_bol(const char *path);
 char	*path_maker(const char *path, const char *exec_name);
 void	free_all(t_pipex *pip);
 bool is_cmd(t_pipex *pip, char *arg, char **out_path, t_type *type);
@@ -54,6 +61,7 @@ char	**ft_split(char *str, char *charset);
 void	print_pipex(t_pipex *pip);
 bool check_no_quoted(t_pipex *pip);
 bool	open_bol_in(t_pipex *pip, const char *path);
+int	forker(void);
 bool	open_bol_ou(t_pipex *pip, const char *path);
 
 #endif

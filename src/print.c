@@ -6,13 +6,13 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:53:48 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/26 19:56:17 by tauer            ###   ########.fr       */
+/*   Updated: 2024/02/27 13:05:13 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./pipex.h"
+#include "../header/pipex.h"
 
-void print_data(t_pipex *pip)
+void	print_data(t_pipex *pip)
 {
 	if (pip->argv)
 		printf("\n[ARGV] : ✅\n");
@@ -26,6 +26,10 @@ void print_data(t_pipex *pip)
 		printf("[path] : ✅\n");
 	else
 		printf("[path] : ❌\n");
+	if (pip->nb_cmd)
+		printf("[nb_cmd] : %d\n", pip->nb_cmd);
+	else
+		printf("[nb_cmd] : ❌\n");
 	if (pip->in_fd)
 		printf("[fd in] : %d\n", pip->in_fd);
 	else
@@ -33,13 +37,22 @@ void print_data(t_pipex *pip)
 	if (pip->ou_fd)
 		printf("[fd ou] : %d\n", pip->ou_fd);
 	else
-		printf("[fd ou] : ❌\n");	
+		printf("[fd ou] : ❌\n");
+	if (pip->id_fat != -1)
+		printf("[id fat] : %d\n", pip->id_fat);
+	else
+		printf("[id fat] : ❌\n");
+	if (pip->id_son != -1)
+		printf("[id son] : %d\n", pip->id_son);
+	else
+		printf("[id son] : ❌\n");
+	printf("i : %d\n", pip->i);
 }
 
-void print_param(t_pipex *pip, char *out_path, t_type *type, int i)
+void	print_param(t_pipex *pip, char *out_path, t_type *type, int i)
 {
-	char **args;
-	size_t index;
+	char	**args;
+	size_t	index;
 
 	index = 0;
 	args = ft_split(pip->argv[i], " ");
@@ -47,39 +60,40 @@ void print_param(t_pipex *pip, char *out_path, t_type *type, int i)
 		return ;
 	if (is_cmd(pip, pip->argv[i], &out_path, type) && *type == param_acces)
 	{
-		while(args[index])
+		while (args[index])
 		{
 			if (index == 0)
 				printf("\033[38;5;21m %s\033[0m ", args[index]);
 			else
 				printf("\033[38;5;90m %s\033[0m |", args[index]);
-			index++;		
+			index++;
 		}
 	}
-	else if (is_cmd(pip, pip->argv[i], &out_path, type) && *type == param_parsor)
+	else if (is_cmd(pip, pip->argv[i], &out_path, type)
+		&& *type == param_parsor)
 	{
-		while(args[index])
+		while (args[index])
 		{
 			if (index == 0)
 				printf("\033[38;5;21m %s\033[0m ", args[index]);
 			else
 				printf("\033[38;5;90m %s\033[0m |", args[index]);
-			index++;		
+			index++;
 		}
 	}
-	free_tab(args);	
+	free_tab(args);
 }
 
-void print_cmd(t_pipex *pip, int i)
+void	print_cmd(t_pipex *pip, int i)
 {
-	char *out_path;
-	t_type type;
+	char	*out_path;
+	t_type	type;
 
 	type = no_cmd;
-	// printf("i %d size %d\n", i , pip->argc);
 	if ((i == 0 && !is_cmd(pip, pip->argv[0], &out_path, &type)))
 		printf("\033[38;5;226m %s\033[0m |", pip->argv[i]);
-	else if (i == pip->argc - 1 && !is_cmd(pip, pip->argv[pip->argc - 1], &out_path, &type))
+	else if (i == pip->argc - 1 && !is_cmd(pip, pip->argv[pip->argc - 1],
+			&out_path, &type))
 		printf("\033[38;5;226m %s\033[0m", pip->argv[i]);
 	else if (!is_cmd(pip, pip->argv[i], &out_path, &type))
 		printf("\033[38;5;196m %s\033[0m ", pip->argv[i]);
@@ -91,9 +105,9 @@ void print_cmd(t_pipex *pip, int i)
 		print_param(pip, out_path, &type, i);
 }
 
-void print_pipex(t_pipex *pip)
+void	print_pipex(t_pipex *pip)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	// if (!pip->envp)

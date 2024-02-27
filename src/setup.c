@@ -6,11 +6,11 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:44:17 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/26 19:41:56 by tauer            ###   ########.fr       */
+/*   Updated: 2024/02/27 12:36:24 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./pipex.h"
+#include "../header/pipex.h"
 
 void	null_data(t_pipex *pip)
 {
@@ -20,6 +20,9 @@ void	null_data(t_pipex *pip)
 	pip->envp = NULL;
 	pip->in_fd = 0;
 	pip->ou_fd = 0;
+	pip->id_fat = 0;
+	pip->id_son = 0;
+	pip->nb_cmd = 0;
 }
 
 bool	set_arg(char **argv, char **const envp, int argc, t_pipex *pip)
@@ -72,9 +75,11 @@ bool	setup(char **envp, char **argv, int argc, t_pipex *pip)
 {
 	null_data(pip);
 	if (set_arg(argv, envp, argc, pip) == false && envp)
+	{
 		if (set_path(pip))
 			return (false);
 		return (true);
+	}
 	return (false);
 }
 

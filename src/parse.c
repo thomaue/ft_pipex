@@ -6,11 +6,11 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:52:52 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/26 17:15:22 by tauer            ###   ########.fr       */
+/*   Updated: 2024/02/27 10:02:35 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./pipex.h"
+#include "../header/pipex.h"
 
 bool	parsor(t_pipex *pip, char **out_var, const char *execname)
 {
@@ -26,7 +26,7 @@ bool	parsor(t_pipex *pip, char **out_var, const char *execname)
 	{
 		path = path_maker(pip->path[i], "/");
 		filename = path_maker(path, execname);
-		if (acces_bol(pip, filename))
+		if (acces_bol(filename))
 		{
 			*out_var = pip->path[i];
 			free(filename);
@@ -42,7 +42,7 @@ bool	parsor(t_pipex *pip, char **out_var, const char *execname)
 
 bool	is_brut(t_pipex *pip, char *arg, char **out_path, t_type *type)
 {
-	if (acces_bol(pip, arg))
+	if (acces_bol(arg))
 	{
 		*type = brut_acces;
 		*out_path = arg; 
@@ -63,7 +63,7 @@ bool	is_param(t_pipex *pip, char *arg, char **out_path, t_type *type)
 	args = ft_split(arg, " ");
 	if (!args)
 		return (false);
-	if (acces_bol(pip, args[0]))
+	if (acces_bol(args[0]))
 	{
 		*type = param_acces;
 		*out_path = args[0];

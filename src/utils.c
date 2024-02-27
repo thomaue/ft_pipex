@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 14:50:08 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/26 19:40:18 by tauer            ###   ########.fr       */
+/*   Created: 2024/02/24 14:49:21 by tauer             #+#    #+#             */
+/*   Updated: 2024/02/27 09:59:57 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./pipex.h"
+#include "../header/pipex.h"
 
-void	free_tab(char **tab)
+size_t	ft_strlen(const char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab);
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
 }
 
-void	free_all(t_pipex *pip)
+bool	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (pip)
+	while (n > 0)
 	{
-		if (pip->path)
-			free_tab(pip->path);
+		if (*s1 != *s2 || *s1 == '\0' || *s2 == '\0')
+			return (false);
+		s1++;
+		s2++;
+		n--;
 	}
-	if (pip->in_fd)
-		close(pip->in_fd);
-	if (pip->ou_fd)
-		close(pip->ou_fd);
+	return (true);
 }

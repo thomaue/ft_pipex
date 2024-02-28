@@ -6,14 +6,14 @@
 #    By: tauer <tauer@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 17:59:50 by tauer             #+#    #+#              #
-#    Updated: 2024/02/27 13:02:59 by tauer            ###   ########.fr        #
+#    Updated: 2024/02/28 08:49:03 by tauer            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_DIR	=	src
 BUILD_DIR	=	build
 NAME		=	pipex
-CFLAG		=	-Wall -Wextra -I./header -g3
+CFLAG		=	-Wall -Wextra -Werror -I./header -g3
 
 SRC			=\
 			$(wildcard $(SRC_DIR)/*.c)
@@ -21,7 +21,7 @@ CC			=	cc
 
 OBJ		=	$(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o, $(SRC))
 
-ARGV    = file1.txt "ls -la" grep cat file2.txt
+ARGV    = file1.txt cat "grep jr" file2.txt
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)

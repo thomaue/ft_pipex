@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:44:17 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/27 12:36:24 by tauer            ###   ########.fr       */
+/*   Updated: 2024/02/28 09:44:41 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ bool	setup(char **envp, char **argv, int argc, t_pipex *pip)
 	if (set_arg(argv, envp, argc, pip) == false && envp)
 	{
 		if (set_path(pip))
+		{
 			return (false);
+		}
 		return (true);
 	}
 	return (false);

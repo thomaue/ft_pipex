@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:53:48 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/27 13:05:13 by tauer            ###   ########.fr       */
+/*   Updated: 2024/02/28 08:55:59 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_data(t_pipex *pip)
 	else
 		printf("[path] : ❌\n");
 	if (pip->nb_cmd)
-		printf("[nb_cmd] : %d\n", pip->nb_cmd);
+		printf("[nb_cmd] : %zu\n", pip->nb_cmd);
 	else
 		printf("[nb_cmd] : ❌\n");
 	if (pip->in_fd)
@@ -46,7 +46,7 @@ void	print_data(t_pipex *pip)
 		printf("[id son] : %d\n", pip->id_son);
 	else
 		printf("[id son] : ❌\n");
-	printf("i : %d\n", pip->i);
+	printf("i : %zu\n", pip->i);
 }
 
 void	print_param(t_pipex *pip, char *out_path, t_type *type, int i)

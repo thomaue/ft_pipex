@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:57:14 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/27 13:04:48 by tauer            ###   ########.fr       */
+/*   Updated: 2024/02/28 09:53:03 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,47 +28,79 @@ bool	pipex(t_pipex *pip)
 	return (false);
 }
 
-void	set_id(t_pipex *pip, pid_t id)
+void	ft_exec(t_pipex *pip, int i, t_type *type, int p_fd[2])
 {
-	if (id == 0)
-		pip->id_fat = id;
+	char **args;
+	char *out_path;
+	
+	args = ft_split(pip->argv[i], " ");
+	if (!args)
+		exit(1);
+	if (is_cmd(pip, pip->argv[i], &out_path, type))
+	{
+		if (*type == brut_acces)
+			execve(out_path, args, pip->envp);
+		else if (*type == brut_parsor)
+			execve(path_maker(out_path, path_maker("/", args[0])), args,
+				pip->envp);
+		else if (*type == param_acces)
+			execve(path_maker(out_path, path_maker("/", args[0])), args,
+				pip->envp);
+		else if (*type == param_parsor)
+		{
+			execve(path_maker(out_path, path_maker("/", args[0])), args,
+				pip->envp);
+		}
+	}
+}
+
+void	forker(t_pipex *pip, int i)
+{
+	pid_t	id;
+	t_type	type;
+	int		p_fd[2];
+
+	printf("%d : [%s] - %d\n", i,pip->argv[i], pip->argc - 2);
+	if (pipe(p_fd) == -1)
+		exit(EXIT_FAILURE);
+	id = fork();
+	if (id == -1)
+	{
+		perror("fork");
+		printf("NO MORE FORK PLS...\n");
+		free_tab(pip->path);
+		exit(EXIT_FAILURE);
+	}
+	else if (id == 0)
+	{
+		dup2();
+		close(p_fd[0]);
+		ft_exec(pip, i, &type, p_fd);
+		// exit(EXIT_SUCCESS);
+	}
 	else
-		pip->id_son = id;
+	{
+		
+	}
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	pip;
-	pid_t	id;
 	size_t	i;
 
 	i = 0;
-	id = 0;
 	setup(envp, argv, argc, &pip);
 	if (pipex(&pip))
 	{
 		while (i < pip.nb_cmd)
 		{
-			id = fork();
-			set_id(&pip, id);
-			pip.i = i;
-			// printf("%d\n", id);
-			printf("%d -> id : %d\n", i, id);
-			if (id == 0)
-			{
-				// printf("ok\n");
-				 print_pipex(&pip);
-				// free_all(&pip);
-				return (0);
-			}
-			// else
-			// {
-			// 	print_pipex(&pip);
-			// }
-			i++;
+			forker(&pip, ++i);
+			printf("Working on %s\n", pip.argv[i]);
 		}
-		// waitpid(pip.id_2, NULL, 0);
-	}
+	}		
+	i = 0;
 	free_all(&pip);
+	
 	return (0);
 }

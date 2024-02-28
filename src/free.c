@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:50:08 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/27 09:59:32 by tauer            ###   ########.fr       */
+/*   Updated: 2024/02/28 04:34:47 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,8 @@ void	free_tab(char **tab)
 
 void	free_all(t_pipex *pip)
 {
-	if (pip)
-	{
-		if (pip->path)
-			free_tab(pip->path);
-	}
-	if (pip->in_fd)
-		close(pip->in_fd);
-	if (pip->ou_fd)
-		close(pip->ou_fd);
+	if (pip->path)
+		free_tab(pip->path);
+	close(pip->in_fd);
+	close(pip->ou_fd);
 }

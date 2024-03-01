@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:44:17 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/28 09:44:41 by tauer            ###   ########.fr       */
+/*   Updated: 2024/02/28 15:59:55 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	null_data(t_pipex *pip)
 	pip->envp = NULL;
 	pip->in_fd = 0;
 	pip->ou_fd = 0;
-	pip->id_fat = 0;
-	pip->id_son = 0;
 	pip->nb_cmd = 0;
 }
 
@@ -74,6 +72,7 @@ bool	set_path(t_pipex *pip)
 bool	setup(char **envp, char **argv, int argc, t_pipex *pip)
 {
 	null_data(pip);
+	pip->i = 0;
 	if (set_arg(argv, envp, argc, pip) == false && envp)
 	{
 		if (set_path(pip))

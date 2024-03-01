@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:53:48 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/28 08:55:59 by tauer            ###   ########.fr       */
+/*   Updated: 2024/02/28 13:25:25 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,15 @@ void	print_data(t_pipex *pip)
 		printf("[nb_cmd] : %zu\n", pip->nb_cmd);
 	else
 		printf("[nb_cmd] : ❌\n");
-	if (pip->in_fd)
+	if (pip->in_fd > 0)
 		printf("[fd in] : %d\n", pip->in_fd);
 	else
 		printf("[fd in] : ❌\n");
-	if (pip->ou_fd)
+	if (pip->ou_fd > 0)
 		printf("[fd ou] : %d\n", pip->ou_fd);
 	else
-		printf("[fd ou] : ❌\n");
-	if (pip->id_fat != -1)
-		printf("[id fat] : %d\n", pip->id_fat);
-	else
-		printf("[id fat] : ❌\n");
-	if (pip->id_son != -1)
-		printf("[id son] : %d\n", pip->id_son);
-	else
-		printf("[id son] : ❌\n");
-	printf("i : %zu\n", pip->i);
+		printf("[fd ou] : ❌\n\n");
+	printf("i : %zu\n\n", pip->i);
 }
 
 void	print_param(t_pipex *pip, char *out_path, t_type *type, int i)

@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:48:27 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/27 12:37:01 by tauer            ###   ########.fr       */
+/*   Updated: 2024/03/01 15:10:26 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ bool	check_no_quoted(t_pipex *pip)
 	size_t	locker;
 	size_t	file;
 	size_t	i;
-	t_type	type;
+	// t_type	type;
 
 	locker = 0;
 	file = 0;
 	i = 0;
-	type = no_cmd;
+	// type = no_cmd;
 	while (pip->argv[i])
 	{
 		format_counter(pip, &file, &locker, i);

@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:53:48 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/28 13:25:25 by tauer            ###   ########.fr       */
+/*   Updated: 2024/03/01 20:19:07 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,3 +115,37 @@ void	print_pipex(t_pipex *pip)
 	print_data(pip);
 	printf("============================================================\n");
 }
+
+void	print_upercase(char *str)
+{
+	size_t	i;
+	char	current;
+
+	i = 0;
+	printf("[");
+	while (str[i] && str[i] >= 'a' && str[i] <= 'z')
+	{
+		current = str[i] - 32;
+		printf("\033[38;5;196m%c\033[0m", current);
+		i++;
+	}
+	printf("]");
+}
+
+void	print_splited(t_pipex *pip, char **arg)
+{
+	size_t	i;
+
+	i = 0;
+	printf("> \033[38;5;93mCHILD\033[0m \033[38;5;20m%zu\033[0m |   ", pip->i);
+	while (arg[i])
+	{
+		if (i == 0)
+			print_upercase(arg[i++]);
+		else
+			printf(" [\033[38;5;160m%s\033[0m]", arg[i++]);
+	}
+	printf("\n");
+	free_tab(arg);
+}
+

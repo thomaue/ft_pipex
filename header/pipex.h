@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 21:44:17 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/28 15:21:23 by tauer            ###   ########.fr       */
+/*   Updated: 2024/03/01 20:24:41 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,10 @@ bool	forker(t_pipex *pip);
 bool		open_bol_ou(t_pipex *pip, const char *path);
 bool		is_param(t_pipex *pip, char *arg, char **out_path, t_type *type);
 bool		is_brut(t_pipex *pip, char *arg, char **out_path, t_type *type);
+void	print_splited(t_pipex *pip, char **arg);
+bool	conditions(t_pipex *pip);
+bool	pipex(t_pipex *pip);
+void	recursive_execute(t_pipex *pip);
+void	format_counter(t_pipex *pip, size_t *file, size_t *locker, size_t i);
 
 #endif

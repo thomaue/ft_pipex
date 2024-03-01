@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 14:46:31 by tauer             #+#    #+#             */
-/*   Updated: 2024/02/27 09:59:28 by tauer            ###   ########.fr       */
+/*   Updated: 2024/03/01 20:22:30 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,21 @@ char	**ft_split(char *str, char *charset)
 	return (tab_split);
 }
 
-char	*clear_quote(char *arg)
-{
-	char	*ret;
-	size_t	i;
+// char	*clear_quote(char *arg)
+// {
+// 	char	*ret;
+// 	size_t	i;
 
-	i = 0;
-	ret = (char *)malloc(sizeof(char) * ft_strlen(arg) + 1);
-	if (!ret)
-		return (NULL);
-	while (arg[i])
-	{
-		ret[i] = arg[i];
-		i++;
-	}
-	ret[i] = '\0';
-	// printf("[CLEAR QUOTE] : [%s]\n", ret);
-	return (ret);
-}
+// 	i = 0;
+// 	ret = (char *)malloc(sizeof(char) * ft_strlen(arg) + 1);
+// 	if (!ret)
+// 		return (NULL);
+// 	while (arg[i])
+// 	{
+// 		ret[i] = arg[i];
+// 		i++;
+// 	}
+// 	ret[i] = '\0';
+// 	// printf("[CLEAR QUOTE] : [%s]\n", ret);
+// 	return (ret);
+// }

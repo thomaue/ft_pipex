@@ -6,7 +6,7 @@
 #    By: tauer <tauer@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/22 17:59:50 by tauer             #+#    #+#              #
-#    Updated: 2024/02/28 18:51:23 by tauer            ###   ########.fr        #
+#    Updated: 2024/03/27 17:06:25 by tauer            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,6 @@ valgrind : clear
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --trace-children=yes ./$(NAME) $(ARGV)
 
 re: fclean all clear 
-	touch file1.txt
+	touch file.txt
 
 .PHONY: all clean fclean re

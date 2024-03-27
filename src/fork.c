@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:05:29 by tauer             #+#    #+#             */
-/*   Updated: 2024/03/01 20:19:41 by tauer            ###   ########.fr       */
+/*   Updated: 2024/03/27 01:05:56 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,62 @@ bool	forker(t_pipex *pip)
 {
 	pid_t	pid;
 	t_type	type;
+	int		tube[2];
 
-	// printf("\n");
+	if (pipe(tube) == -1)
+	{
+		return (free_tab(pip->path), false);
+	}
 	pid = fork();
 	if (pid < 0)
 	{
-		free_tab(pip->path);
-		return (false);
+		return (free_tab(pip->path), false);
 	}
 	else if (pid == 0)
 	{
-		// child
-		print_splited(pip, ft_split(pip->argv[pip->i], " "));
+		if (pip->i == 1)
+		{
+			close(tube[0]);
+			dup2(pip->in_fd, 0);
+			close(tube[1]);
+		}
+		else if (pip->i == pip->nb_cmd - 1)
+		{
+			close(tube[1]);
+			dup2(tube[0], 0);
+			close(tube[0]);
+			dup2(pip->ou_fd, 1);
+			close(pip->ou_fd);
+		}
+		else
+		{
+			close(tube[0]);
+			dup2(tube[1], 0);
+			close(tube[1]);
+		}
 		ft_exec(pip, pip->i, &type);
+		print_splited(pip, ft_split(pip->argv[pip->i], " "));
 	}
 	else
 	{
-		// parent
+		if (pip->i == 1)
+		{
+			close(tube[1]);
+			dup2(tube[0], 0);
+			close(tube[0]);
+			close(pip->in_fd);
+		}
+		else if (pip->i == pip->nb_cmd - 1)
+		{
+			close(tube[0]);
+			close(tube[1]);
+			close(pip->ou_fd);
+		}
+		else
+		{
+			close(tube[0]);
+			close(tube[1]);
+		}
 		waitpid(pid, NULL, 0);
 	}
 	return (true);

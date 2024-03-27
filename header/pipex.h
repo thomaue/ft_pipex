@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 21:44:17 by tauer             #+#    #+#             */
-/*   Updated: 2024/03/01 20:24:41 by tauer            ###   ########.fr       */
+/*   Updated: 2024/03/26 23:31:45 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct s_pipex
 	int		argc;
 	char	**path;
 	
+	int		re_fd;
+	int		wr_fd;
 	int		in_fd;
 	int		ou_fd;
 }			t_pipex;

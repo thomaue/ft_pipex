@@ -6,7 +6,7 @@
 /*   By: tauer <tauer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 20:20:58 by tauer             #+#    #+#             */
-/*   Updated: 2024/03/01 20:21:53 by tauer            ###   ########.fr       */
+/*   Updated: 2024/03/27 00:37:20 by tauer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ bool	format_no_quoted(t_pipex *pip)
 
 bool	conditions(t_pipex *pip)
 {
-	if (pip->i >= pip->nb_cmd)
+	if (pip->i >= pip->nb_cmd - 1)
 		return (false);
 	return (true);
 }
